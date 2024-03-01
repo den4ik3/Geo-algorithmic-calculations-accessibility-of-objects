@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
+
+        <title>MapAnalysis</title>
+    </head> 
+
+    <body style = 'margin: 0px; margin-top: 1%;'>
+        <style>
+            .map { 
+                width: 98%; 
+                height: 450px;
+                margin-bottom: 1%;
+                margin-left: 1%;
+            }
+            .text{
+                text-align: center;
+                background-color: #ececec;
+                margin: 1%;
+                padding: 10px;
+                font-family: "Arial"
+            }
+        </style>
+
+        <div class="text" style="padding: 30px; font-size: 30px;"><strong>Анализ района Раменки и Гагаринского района города Москвы</strong></div>
+        <div style="background-color: #ececec; margin: 1%; padding: 30px; padding-top: 10px; padding-bottom: 5px; font-family: Arial"> 
+            Плотность населения(чел./кв. км): 
+            <ul>
+                <li>в Гагаринском районе: 13 686 </li>
+                <li>в районе Раменки: 8 434 </li>
+            </ul>
+        </div>
+        <div>
+            <div class = "text"> Все районы: спортивно-оздоровительные объекты </div>
+            <div class = "map" id = 'map_all_sport'></div>
+        </div>
+        <div>
+            <div class = "text"> Все районы: культурно-досуговые объекты </div>
+            <div class = "map" id = 'map_all_culture'></div>
+        </div>
+        <div>
+            <div class = "text"> Все районы: продуктовые магазины </div>
+            <div class = "map" id = 'map_all_shops'></div>
+        </div>
+        <div>
+            <div class = "text"> Гагаринский район: спортивно-оздоровительные объекты </div>
+            <div class = "map" id = 'map_gagarinsky_sport'></div>
+        </div>
+        <div>
+            <div class = "text"> Гагаринский район: культурно-досуговые объекты </div>
+            <div class = "map" id = 'map_gagarinsky_culture'></div>
+        </div>
+        <div>
+            <div class = "text"> Гагаринский район: продуктовые магазины </div>
+            <div class = "map" id = 'map_gagarinsky_shops'></div>
+        </div>
+        <div>
+            <div class = "text"> Район Раменки: спортивно-оздоровительные объекты </div>
+            <div class = "map" id = 'map_ramenki_sport'></div>
+        </div>
+        <div>
+            <div class = "text"> Район Раменки: культурно-досуговые объекты </div>
+            <div class = "map" id = 'map_ramenki_culture'></div>
+        </div>
+        <div>
+            <div class = "text"> Район Раменки: продуктовые магазины  </div>
+            <div class = "map" id = 'map_ramenki_shops'></div>
+        </div>
+        
+        <script type = "text/javascript">
+            DG.then(function () {
+                let map_all_sport = DG.map('map_all_sport', {
+                    center: [55.704919, 37.538373], 
+                    zoom: 12, 
+                    minZoom: 11,
+                    poi : false
+                });
+                let map_all_culture = DG.map('map_all_culture', {
+                    center: [55.704919, 37.538373], 
+                    zoom: 12, 
+                    minZoom: 11,
+                    poi : false
+                });
+                let map_all_shops = DG.map('map_all_shops', {
+                    center: [55.704919, 37.538373], 
+                    zoom: 12, 
+                    minZoom: 11,
+                    poi : false
+                });
+                let map_gagarinsky_sport = DG.map('map_gagarinsky_sport', {
+                    center: [55.699549, 37.544726], 
+                    zoom: 12, 
+                    minZoom: 11,
+                    poi : false
+                });
+                let map_gagarinsky_culture = DG.map('map_gagarinsky_culture', {
+                    center: [55.699549, 37.544726], 
+                    zoom: 12, 
+                    minZoom: 11,
+                    poi : false
+                });
+                let map_gagarinsky_shops = DG.map('map_gagarinsky_shops', {
+                    center: [55.699549, 37.544726], 
+                    zoom: 12, 
+                    minZoom: 11,
+                    poi : false
+                });
+                let map_ramenki_sport = DG.map('map_ramenki_sport', {
+                    center: [55.704919, 37.538373], 
+                    zoom: 12, 
+                    minZoom: 11,
+                    poi : false
+                });
+                let map_ramenki_culture = DG.map('map_ramenki_culture', {
+                    center: [55.704919, 37.538373], 
+                    zoom: 12, 
+                    minZoom: 11,
+                    poi : false
+                });
+                let map_ramenki_shops = DG.map('map_ramenki_shops', {
+                    center: [55.704919, 37.538373], 
+                    zoom: 12, 
+                    minZoom: 11,
+                    poi : false
+                });
+                
+                DG.control.scale().addTo(map_all_sport);
+                DG.control.ruler({position: 'bottomleft'}).addTo(map_all_sport);
+                DG.control.traffic().addTo(map_all_sport);
+                DG.control.scale().addTo(map_all_culture);
+                DG.control.ruler({position: 'bottomleft'}).addTo(map_all_culture);
+                DG.control.traffic().addTo(map_all_culture);
+                DG.control.scale().addTo(map_all_shops);
+                DG.control.ruler({position: 'bottomleft'}).addTo(map_all_shops);
+                DG.control.traffic().addTo(map_all_shops);
+                DG.control.scale().addTo(map_gagarinsky_sport);
+                DG.control.ruler({position: 'bottomleft'}).addTo(map_gagarinsky_sport);
+                DG.control.traffic().addTo(map_gagarinsky_sport);
+                DG.control.scale().addTo(map_gagarinsky_culture);
+                DG.control.ruler({position: 'bottomleft'}).addTo(map_gagarinsky_culture);
+                DG.control.traffic().addTo(map_gagarinsky_culture);
+                DG.control.scale().addTo(map_gagarinsky_shops);
+                DG.control.ruler({position: 'bottomleft'}).addTo(map_gagarinsky_shops);
+                DG.control.traffic().addTo(map_gagarinsky_shops);
+                DG.control.scale().addTo(map_ramenki_sport);
+                DG.control.ruler({position: 'bottomleft'}).addTo(map_ramenki_sport);
+                DG.control.traffic().addTo(map_ramenki_sport);
+                DG.control.scale().addTo(map_ramenki_culture);
+                DG.control.ruler({position: 'bottomleft'}).addTo(map_ramenki_culture);
+                DG.control.traffic().addTo(map_ramenki_culture);
+                DG.control.scale().addTo(map_ramenki_shops);
+                DG.control.ruler({position: 'bottomleft'}).addTo(map_ramenki_shops);
+                DG.control.traffic().addTo(map_ramenki_shops);
+                
+
+                let ramenki = [[55.69442, 37.46634], [55.68475, 37.47909], [55.68114, 37.48145],[55.68306, 37.48466],
+                    [55.68204, 37.48662], [55.68382, 37.48989], [55.68737, 37.48698], [55.68855, 37.48863], [55.68695, 37.49321],
+                    [55.68721, 37.49564], [55.68805, 37.49690], [55.68796, 37.50666], [55.67901, 37.51011], [55.69350, 37.53651],
+                    [55.71043, 37.55929], [55.71203, 37.54895], [55.71648, 37.54204], [55.72254, 37.54123], [55.72602, 37.54324], 
+                    [55.72820, 37.54766], [55.73247, 37.54354], [55.73612, 37.53870], [55.73489, 37.53033], [55.73064, 37.51629], 
+                    [55.72141, 37.49582], [55.71154, 37.49187], [55.70734, 37.48775], [55.70090, 37.47411]
+                ];
+                let polygonRamenki1 = DG.polygon(ramenki, {color: 'green', fillOpacity : 0.08}).addTo(map_all_sport).bindLabel('Район Раменки');
+                let polygonRamenki2 = DG.polygon(ramenki, {color: 'green', fillOpacity : 0.08}).addTo(map_all_culture).bindLabel('Район Раменки');
+                let polygonRamenki3 = DG.polygon(ramenki, {color: 'green', fillOpacity : 0.08}).addTo(map_all_shops).bindLabel('Район Раменки');
+                let polygonRamenki4 = DG.polygon(ramenki, {color: 'green', fillOpacity : 0.08}).addTo(map_ramenki_sport).bindLabel('Район Раменки');
+                let polygonRamenki5 = DG.polygon(ramenki, {color: 'green', fillOpacity : 0.08}).addTo(map_ramenki_culture).bindLabel('Район Раменки');
+                let polygonRamenki6 = DG.polygon(ramenki, {color: 'green', fillOpacity : 0.08}).addTo(map_ramenki_shops).bindLabel('Район Раменки');
+                
+                let gagarinsky = [[55.68997, 37.53007], [55.68494, 37.53878], [55.68080, 37.54758], [55.69162, 37.56131],
+                    [55.70637, 37.58736],  [55.71415, 37.57749], [55.71154, 37.56934], [55.71041, 37.55929], [55.69353, 37.53659]
+                ];
+                let polygonGagarinsky1 = DG.polygon(gagarinsky, {color: 'blue', fillOpacity : 0.08}).addTo(map_all_sport).bindLabel('Гагаринский район');
+                let polygonGagarinsky2 = DG.polygon(gagarinsky, {color: 'blue', fillOpacity : 0.08}).addTo(map_all_culture).bindLabel('Гагаринский район');
+                let polygonGagarinsky3 = DG.polygon(gagarinsky, {color: 'blue', fillOpacity : 0.08}).addTo(map_all_shops).bindLabel('Гагаринский район');
+                let polygonGagarinsky4 = DG.polygon(gagarinsky, {color: 'blue', fillOpacity : 0.08}).addTo(map_gagarinsky_sport).bindLabel('Гагаринский район');
+                let polygonGagarinsky5 = DG.polygon(gagarinsky, {color: 'blue', fillOpacity : 0.08}).addTo(map_gagarinsky_culture).bindLabel('Гагаринский район');
+                let polygonGagarinsky6 = DG.polygon(gagarinsky, {color: 'blue', fillOpacity : 0.08}).addTo(map_gagarinsky_shops).bindLabel('Гагаринский район');
+                
+                let xlsxFile = require('read-excel-file/node');
+                let gag = [], ram = [];
+
+                // спортивно-оздоровительные объекты в Гагаринском
+                xlsxFile('./Объекты в Гагаринском.xlsx', { sheet: 'спортивно-оздоровительные объек' }).then((rows) => {
+                    gag = [];
+                    for (let i = 1; i < rows.length; i++){
+                        gag.push([rows[i][0], rows[i][1], rows[i][2], rows[i][4], rows[i][5]]);
+                    }
+                    for (let i = 0; i < gag.length; i++) {
+                        let b = gag[i];
+                        let title = b[2] + ' Адрес: ' + b[3] + ' ' + b[4];
+                        let marker1 = DG.marker([b[0], b[1]]).addTo(map_all_sport).bindPopup(title);
+                        let marker2 = DG.marker([b[0], b[1]]).addTo(map_gagarinsky_sport).bindPopup(title);
+                        let circle1 = DG.circle([b[0], b[1]], {color: 'red', radius : 1000, stroke : false, opacity : 0.1, weight : 1, fill : true, fillOpacity : 0.05}).addTo(map_all_sport);
+                        let circle2 = DG.circle([b[0], b[1]], {color: 'red', radius : 1000, stroke : false, opacity : 0.1, weight : 1, fill : true, fillOpacity : 0.05}).addTo(map_gagarinsky_sport);
+                    }
+                })
+                // культурно-досуговые объекты в Гагаринском
+                xlsxFile('./Объекты в Гагаринском.xlsx', { sheet: 'культурно-досуговые объекты' }).then((rows) => {
+                    gag = [];
+                    for (let i = 1; i < rows.length; i++){
+                        gag.push([rows[i][0], rows[i][1], rows[i][2], rows[i][4], rows[i][5]]);
+                    }
+                    for (let i = 0; i < gag.length; i++) {
+                        let b = gag[i];
+                        let title = b[2] + ' Адрес: ' + b[3] + ' ' + b[4];
+                        let marker1 = DG.marker([b[0], b[1]]).addTo(map_all_culture).bindPopup(title);
+                        let marker2 = DG.marker([b[0], b[1]]).addTo(map_gagarinsky_culture).bindPopup(title);
+                        let circle1 = DG.circle([b[0], b[1]], {color: 'red', radius : 1000, stroke : false, opacity : 0.1, weight : 1, fill : true, fillOpacity : 0.1}).addTo(map_all_culture);
+                        let circle2 = DG.circle([b[0], b[1]], {color: 'red', radius : 1000, stroke : false, opacity : 0.1, weight : 1, fill : true, fillOpacity : 0.1}).addTo(map_gagarinsky_culture);
+                    }
+                })
+                // магазины продуктов в Гагаринском
+                xlsxFile('./Объекты в Гагаринском.xlsx', { sheet: 'магазины продуктов' }).then((rows) => {
+                    gag = [];
+                    for (let i = 1; i < rows.length; i++){
+                        gag.push([rows[i][0], rows[i][1], rows[i][2], rows[i][4], rows[i][5]]);
+                    }
+                    for (let i = 0; i < gag.length; i++) {
+                        let b = gag[i];
+                        let title = b[2] + ' Адрес: ' + b[3] + ' ' + b[4];
+                        let marker1 = DG.marker([b[0], b[1]]).addTo(map_all_shops).bindPopup(title);
+                        let marker2 = DG.marker([b[0], b[1]]).addTo(map_gagarinsky_shops).bindPopup(title);
+                        let circle1 = DG.circle([b[0], b[1]], {color: 'red', radius : 1000, stroke : false, opacity : 0.1, weight : 1, fill : true, fillOpacity : 0.01}).addTo(map_all_shops);
+                        let circle2 = DG.circle([b[0], b[1]], {color: 'red', radius : 1000, stroke : false, opacity : 0.1, weight : 1, fill : true, fillOpacity : 0.01}).addTo(map_gagarinsky_shops);
+                    }
+                })
+                // спортивно-оздоровительные объекты в Раменках
+                xlsxFile('./Объекты в Раменках.xlsx', { sheet: 'спортивно-оздоровительные объек' }).then((rows) => {
+                    ram = [];
+                    for (let i = 1; i < rows.length; i++){
+                        ram.push([rows[i][0], rows[i][1], rows[i][2], rows[i][4], rows[i][5]]);
+                    }
+                    for (let i = 0; i < ram.length; i++) {
+                        let b = ram[i];
+                        let title = b[2] + ' Адрес: ' + b[3] + ' ' + b[4];
+                        let marker1 = DG.marker([b[0], b[1]]).addTo(map_all_sport).bindPopup(title);
+                        let marker2 = DG.marker([b[0], b[1]]).addTo(map_ramenki_sport).bindPopup(title);
+                        let circle1 = DG.circle([b[0], b[1]], {color: 'red', radius : 1000, stroke : false, opacity : 0.1, weight : 1, fill : true, fillOpacity : 0.05}).addTo(map_all_sport);
+                        let circle2 = DG.circle([b[0], b[1]], {color: 'red', radius : 1000, stroke : false, opacity : 0.1, weight : 1, fill : true, fillOpacity : 0.05}).addTo(map_ramenki_sport);
+                    }
+                })
+                // культурно-досуговые объекты в Раменках
+                xlsxFile('./Объекты в Раменках.xlsx', { sheet: 'культурно-досуговые объекты' }).then((rows) => {
+                    ram = [];
+                    for (let i = 1; i < rows.length; i++){
+                        ram.push([rows[i][0], rows[i][1], rows[i][2], rows[i][4], rows[i][5]]);
+                    }
+                    for (let i = 0; i < ram.length; i++) {
+                        let b = ram[i];
+                        let title = b[2] + ' Адрес: ' + b[3] + ' ' + b[4];
+                        let marker1 = DG.marker([b[0], b[1]]).addTo(map_all_culture).bindPopup(title);
+                        let marker2 = DG.marker([b[0], b[1]]).addTo(map_ramenki_culture).bindPopup(title);
+                        let circle1 = DG.circle([b[0], b[1]], {color: 'red', radius : 1000, stroke : false, opacity : 0.1, weight : 1, fill : true, fillOpacity : 0.1}).addTo(map_all_culture);
+                        let circle2 = DG.circle([b[0], b[1]], {color: 'red', radius : 1000, stroke : false, opacity : 0.1, weight : 1, fill : true, fillOpacity : 0.1}).addTo(map_ramenki_culture);
+                    }
+                })
+                // магазины продуктов в Раменках
+                xlsxFile('./Объекты в Раменках.xlsx', { sheet: 'магазины продуктов' }).then((rows) => {
+                    ram = [];
+                    for (let i = 1; i < rows.length; i++){
+                        ram.push([rows[i][0], rows[i][1], rows[i][2], rows[i][4], rows[i][5]]);
+                    }
+                    for (let i = 0; i < ram.length; i++) {
+                        let b = ram[i];
+                        let title = b[2] + ' Адрес: ' + b[3] + ' ' + b[4];
+                        let marker1 = DG.marker([b[0], b[1]]).addTo(map_all_shops).bindPopup(title);
+                        let marker2 = DG.marker([b[0], b[1]]).addTo(map_ramenki_shops).bindPopup(title);
+                        let circle1 = DG.circle([b[0], b[1]], {color: 'red', radius : 1000, stroke : false, opacity : 0.1, weight : 1, fill : true, fillOpacity : 0.01}).addTo(map_all_shops);
+                        let circle2 = DG.circle([b[0], b[1]], {color: 'red', radius : 1000, stroke : false, opacity : 0.1, weight : 1, fill : true, fillOpacity : 0.01}).addTo(map_ramenki_shops);
+                    }
+                    
+                })
+            });
+        </script>
+    </body>
+</html>
